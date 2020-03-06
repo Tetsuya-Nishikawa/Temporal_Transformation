@@ -41,13 +41,15 @@ def SaveVideo(video, video_name):
         video->ビデオ
         video_name->ビデオファイル名
     """
-    fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-    out = cv2.VideoWriter(video_name, 0x7634706d, 20.0, (video.shape[1],video.shape[2]))
-
+    #fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+    format = cv2.VideoWriter_fourcc(*'mp4v')
+    print(video.shape)
+    out = cv2.VideoWriter(video_name, format, 20.0, (video.shape[2],video.shape[1]))
+    #out = cv2.VideoWriter(video_name, cv2.VideoWriter_fourcc('M','J','P','G'), 20.0, (video.shape[1],video.shape[2]))
     frames = video.shape[0]
     print("framesは、", frames)
     for i in range(frames):
-        frame = video[i]
+        frame = video[i][:,:,::-1]
         print(frame.shape)
         out.write(frame)
     out.release()
