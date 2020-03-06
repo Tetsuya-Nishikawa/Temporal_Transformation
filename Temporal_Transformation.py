@@ -20,7 +20,7 @@ def GetFrames(video_name):
     video = ReadVideo(video_name)
     return video.shape[0]
 
-def DownFrames(video_name, new_frames):
+def IncreaseFrames(video_name, new_frames):
     """
     フレーム数を増やす
     引数：
@@ -30,14 +30,14 @@ def DownFrames(video_name, new_frames):
     
     now_frames = GetFrames(video_name)
     if now_frames > new_frames:
-        print("DownFramesを使う場合、new_framesの方がnow_framesより大きくないといけません。")
+        print("IncreaseFramesを使う場合、new_framesの方がnow_framesより大きくないといけません。")
         sys.exit()
     video = ReadVideo(video_name)
     index_list = [int(i) for i in np.linspace(1, now_frames, num=new_frames)]
 
     return np.array([video[i-1] for i in index_list])
 
-def IncreaseFrames(video_name, new_frames):
+def DecreaseFrames(video_name, new_frames):
     """
     フレーム数を減らす
     引数：
@@ -47,7 +47,7 @@ def IncreaseFrames(video_name, new_frames):
     
     now_frames = GetFrames(video_name)
     if now_frames < new_frames:
-        print("IncreaseFramesを使う場合、now_framesの方がnew_framesより大きくないといけません。")
+        print("DecreaseFramesを使う場合、now_framesの方がnew_framesより大きくないといけません。")
         sys.exit()
     video = ReadVideo(video_name)
     index_list = [int(i) for i in np.linspace(1, now_frames, num=new_frames)]
@@ -76,5 +76,5 @@ if __name__ == '__main__':
     input_path = "./video/001_008_005.mp4"
     output_path = "./video/sampled_video.mp4"
 
-    sampled_video = DownFrames(input_path, 100)
+    sampled_video = IncreaseFrames(input_path, 100)
     SaveVideo(sampled_video, output_path)
