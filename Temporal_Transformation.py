@@ -3,6 +3,7 @@ import skvideo.io
 import glob
 import cv2
 import sys
+import os
 
 def ReadVideo(video_name):
     """
@@ -64,19 +65,18 @@ def SaveVideo(video, video_name):
         video_name->ビデオファイル名
     """
     format = cv2.VideoWriter_fourcc(*'mp4v')
-    print(video.shape)
     out = cv2.VideoWriter(video_name, format, 20.0, (video.shape[2],video.shape[1]))
     frames = video.shape[0]
-    print("framesは、", frames)
     for i in range(frames):
         frame = video[i][:,:,::-1]
-        print(frame.shape)
         out.write(frame)
     out.release()
 
-video_list = glob.glob("/Users/mori/Desktop/all_cut/*.mp4")
-print(ReadVideo(video_list[0]).shape)
-video = UpSample(video_list[0], 100)
-print(video.shape)
-SaveVideo(video, "upsampled_video.mp4")
-SaveVideo(ReadVideo(video_list[0]), "video.mp4")
+
+
+if __name__ == '__main__':
+    input_path = "./video/001_008_005.mp4"
+    output_path = "./video/sampled_video.mp4"
+
+    sampled_video = UpSample(input_path, 100)
+    SaveVideo(sampled_video, output_path)
