@@ -32,7 +32,7 @@ def UpSample(video_name, new_frames):
     
     now_frames = GetFrames(video_name)
     if now_frames > new_frames:
-        print("UpSampleを使う場合、now_framesの方がnew_framesより大きくないといけません。")
+        print("UpSampleを使う場合、new_framesの方がnow_framesより大きくないといけません。")
         sys.exit()
     video = ReadVideo(video_name)
     index_list = [int(i) for i in np.linspace(1, now_frames, num=new_frames)]
@@ -49,7 +49,7 @@ def DownSample(video_name, new_frames):
     
     now_frames = GetFrames(video_name)
     if now_frames < new_frames:
-        print("DownSampleを使う場合、new_framesの方がnow_framesより大きくないといけません。")
+        print("DownSampleを使う場合、now_framesの方がnew_framesより大きくないといけません。")
         sys.exit()
     video = ReadVideo(video_name)
     index_list = [int(i) for i in np.linspace(1, now_frames, num=new_frames)]
