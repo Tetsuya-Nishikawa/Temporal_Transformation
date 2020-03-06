@@ -1,9 +1,7 @@
 import numpy as np
 import skvideo.io
-import glob
 import cv2
 import sys
-import os
 
 def ReadVideo(video_name):
     """
