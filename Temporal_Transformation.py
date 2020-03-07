@@ -2,6 +2,7 @@ import numpy as np
 import skvideo.io
 import cv2
 import sys
+import imutils
 
 def ReadVideo(video_name):
     """
@@ -70,11 +71,25 @@ def SaveVideo(video, video_name):
         out.write(frame)
     out.release()
 
+#これはいつか使いそうなので、追加してみた。
+def ResizeVideo(video):
+    """
+    ビデオをリサイズする
+    引数:
+        video->ビデオ
+    """
+    frames = video.shape[0]
+    new_video = []
+    for frame in video:
+        new_frame = imutils.resize(frame, width=200)
+        new_video.append(new_frame)
 
+    return np.array(new_video)
 
 if __name__ == '__main__':
     input_path = "./video/001_008_005.mp4"
     output_path = "./video/sampled_video.mp4"
 
-    sampled_video = IncreaseFrames(input_path, 100)
+    #sampled_video = IncreaseFrames(input_path, 100)
+    sampled_video = ResizeVideo(ReadVideo(input_path))
     SaveVideo(sampled_video, output_path)
